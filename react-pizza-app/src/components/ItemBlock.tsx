@@ -5,8 +5,12 @@ export type ItemBlockType = {
     price: string
 }
 
-export const ItemBlock = ({title, price, imageUrl, sizes}) => {
+export const ItemBlock = ({title, price, imageUrl, sizes, types}) => {
 
+    const [activeType, setActiveType] = useState(0);
+    const [activeSize, setActiveSize] = useState(0);
+
+    const typeNames = ['тонкое', 'традиционное']
 
     return (
         <div className="pizza-block">
@@ -18,13 +22,17 @@ export const ItemBlock = ({title, price, imageUrl, sizes}) => {
             <h4 className="pizza-block__title">Чизбургер-пицца</h4>
             <div className="pizza-block__selector">
                 <ul>
-                <li className="active">тонкое</li>
-                <li>традиционное</li>
+                    {
+                        types.map((typeId) =>
+                            <li key={typeId} className={activeType = typeId ?"active" : ''}
+                            onClick={() => setActiveType}>{typeNames[typeId]} см</li> )
+                    }
                 </ul>
                 <ul>
                     {
-                        sizes.map((sizes) =>
-                            <li className="active">{sizes}</li> )
+                        sizes.map((size, i) =>
+                            <li className={activeSize = i ?"active" : ''}
+                            onClick={() => setActiveSize(i)}>{size} см</li> )
                     }
                 </ul>
             </div>
