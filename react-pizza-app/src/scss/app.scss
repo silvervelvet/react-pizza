@@ -32,6 +32,10 @@ body {
     margin-bottom: 50px;
   }
 
+  .content__items {
+    display: block;
+  }
+
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
