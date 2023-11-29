@@ -1,0 +1,21 @@
+.root {
+    li {
+
+        &.selected {
+            color: wheat;
+        }
+
+        display: inline-block;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        border: 1px solid #666;
+        border-radius: 30px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: beige;
+        }
+    }
+}

@@ -3,10 +3,14 @@ import './scss/app.scss';
 import { Sort } from '../components/Sort';
 import { Categories } from '../components/Categories';
 import { ItemBlock } from '../components/ItemBlock';
+import ReactPaginate from 'react-paginate';
+import { Pagination } from '../components/Pagination';
+
 
 export const Home = ({ searchValue, setSearchValue }) => {
 
     const[items, setItems] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1)
     const [categoryId, setCategoryId] = useState(0);
     const [sortType, setSortType] = useState({
       name: 'популярности', sortProperty: 'rating'
@@ -26,7 +30,7 @@ export const Home = ({ searchValue, setSearchValue }) => {
         setItems(arr);
       })
       window.scrollTo(0, 0);
-    }, [categoryId, sortType,searchValue])
+    }, [categoryId, sortType, searchValue, currentPage])
 
     return (
       <div className="container">
@@ -43,6 +47,7 @@ export const Home = ({ searchValue, setSearchValue }) => {
                 .map(o => <ItemBlock key={obj.id} {...obj}/>)
                 }
             </div>
-        </>
+            <Pagination onChangePage={(number) => setCurrentPage(number)}/>
+      </div>
     )
 }
