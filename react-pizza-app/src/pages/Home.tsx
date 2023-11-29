@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './scss/app.scss';
 import { Sort } from '../components/Sort';
 import { Categories } from '../components/Categories';
 import { ItemBlock } from '../components/ItemBlock';
 import ReactPaginate from 'react-paginate';
 import { Pagination } from '../components/Pagination';
+import { Search } from '../components/Search';
+import { SearchContext } from '../App';
 
 
-export const Home = ({ searchValue, setSearchValue }) => {
+export const Home = () => {
+
+    const [searchValue, setSearchValue] = useContext(SearchContext)
 
     const[items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)

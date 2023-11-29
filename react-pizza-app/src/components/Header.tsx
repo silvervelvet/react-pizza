@@ -2,7 +2,7 @@ import logoSVG from '../assets/img/pizza-logo.svg';
 import { Search } from './Search';
 import { Link } from 'react-router-dom';
 
-export const Header = ({ searchValue, setSearchValue }) => {
+export const Header = () => {
     return (
         <div className="header">
         <div className="container">
