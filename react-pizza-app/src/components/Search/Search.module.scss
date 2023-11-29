@@ -1,0 +1,17 @@
+.root {
+    position: relative;
+}
+
+.input {
+    border: 1px solid #000000;
+    padding: 12px 15p;
+    width: 400px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.15s ease-in-out;
+
+    &:focus {
+        border: #ff9900;
+    }
+
+}
