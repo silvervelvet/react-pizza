@@ -8,13 +8,13 @@ import { Pagination } from '../components/Pagination';
 import { Search } from '../components/Search';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch} from 'react-redux';
-import { setCategoryId } from '../../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice';
 import axios from 'axios';
 
 
 export const Home = () => {
 
-  const { categoryId, sort } = useSelector(state => state.filter);
+  const { categoryId, sort, currentPage } = useSelector(state => state.filter);
   const sortType = sort.sortProperty
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ export const Home = () => {
     const [searchValue, setSearchValue] = useContext(SearchContext)
 
     const[items, setItems] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1)
+    // const [currentPage, setCurrentPage] = useState(1)
     // const [categoryId, setCategoryId] = useState(0);
     // const [sortType, setSortType] = useState({
     //   name: 'популярности', sortProperty: 'rating'
@@ -35,14 +35,17 @@ export const Home = () => {
     const onChangeCategory = (id) => {
       dispatch(setCategoryId(id))
     }
+    const onChangePage = (number) => {
+      dispatch(setCurrentPage(number))
+    }
 
     useEffect(() => {
       axios
       .get(`https://655f9061879575426b458852.mockapi.io/items?category=${category}&sortBy=${sortType}${sortType}`)
       .then(res => setItems(res.data))
-      
+
       window.scrollTo(0, 0);
-    }, [categoryId, sortType, searchValue, currentPage])
+    }, [categoryId, sortType, searchValue, pageCount])
 
     return (
       <div className="container">
@@ -59,7 +62,7 @@ export const Home = () => {
                 .map(o => <ItemBlock key={obj.id} {...obj}/>)
                 }
             </div>
-            <Pagination onChangePage={(number) => setCurrentPage(number)}/>
+            <Pagination value={currentPage} onChangePage={onChangePage}/>
       </div>
     )
 }
