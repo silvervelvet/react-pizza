@@ -6,6 +6,8 @@ import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { Routes, Route } from 'react-router-dom';
 import { createContext } from 'vm';
+import { store } from '../redux/store'
+
 
 export const SearchContext = createContext('');
 

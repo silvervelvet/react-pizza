@@ -7,26 +7,38 @@ import ReactPaginate from 'react-paginate';
 import { Pagination } from '../components/Pagination';
 import { Search } from '../components/Search';
 import { SearchContext } from '../App';
+import { useSelector, useDispatch} from 'react-redux';
+import { setCategoryId } from '../../redux/slices/filterSlice';
 
 
 export const Home = () => {
+
+  const { categoryId, sort } = useSelector(state => state.filter);
+  const sortType = sort.sortProperty
+  const dispatch = useDispatch();
+
+
 
     const [searchValue, setSearchValue] = useContext(SearchContext)
 
     const[items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
-    const [categoryId, setCategoryId] = useState(0);
-    const [sortType, setSortType] = useState({
-      name: 'популярности', sortProperty: 'rating'
-    });
+    // const [categoryId, setCategoryId] = useState(0);
+    // const [sortType, setSortType] = useState({
+    //   name: 'популярности', sortProperty: 'rating'
+    // });
 
     const category =  categoryId > 0 ? `category=${categoryId}` : '';
     const search =  searchValue ? `search=${searchValue}` : '';
 
+    const onChangeCategory = (id) => {
+      dispatch(setCategoryId(id))
+    }
+
     useEffect(() => {
       fetch(`https://655f9061879575426b458852.mockapi.io/items?category=${
       category
-      }&sortBy=${sortType.sortProperty}${sortType}`)
+      }&sortBy=${sortType}${sortType}`)
       .then((res) => {
         return res.json;
       })
@@ -39,8 +51,8 @@ export const Home = () => {
     return (
       <div className="container">
             <div className="content__top">
-                <Categories value={categoryId} onChangeCategory={(id) => setCategoryId(id)} />
-                <Sort value={sortType} onChangeSort={(id) => setSortType(id)} />
+                <Categories value={categoryId} onChangeCategory={onClickCategoty} />
+                <Sort  />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
