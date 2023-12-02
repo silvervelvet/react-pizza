@@ -9,6 +9,7 @@ import { Search } from '../components/Search';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch} from 'react-redux';
 import { setCategoryId } from '../../redux/slices/filterSlice';
+import axios from 'axios';
 
 
 export const Home = () => {
@@ -36,15 +37,10 @@ export const Home = () => {
     }
 
     useEffect(() => {
-      fetch(`https://655f9061879575426b458852.mockapi.io/items?category=${
-      category
-      }&sortBy=${sortType}${sortType}`)
-      .then((res) => {
-        return res.json;
-      })
-      .then((arr) => {
-        setItems(arr);
-      })
+      axios
+      .get(`https://655f9061879575426b458852.mockapi.io/items?category=${category}&sortBy=${sortType}${sortType}`)
+      .then(res => setItems(res.data))
+      
       window.scrollTo(0, 0);
     }, [categoryId, sortType, searchValue, currentPage])
 
