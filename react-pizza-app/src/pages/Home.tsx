@@ -9,25 +9,21 @@ import { Search } from '../components/Search';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch} from 'react-redux';
 import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice';
+import { fetchPizzas } from '../../redux/slices/pizzaSlice';
 import axios from 'axios';
 
 
-export const Home = () => {
+export const Home = async () => {
 
-  const { categoryId, sort, currentPage } = useSelector(state => state.filter);
-  const sortType = sort.sortProperty
-  const dispatch = useDispatch();
-
-
+    const { categoryId, sort, currentPage } = useSelector(state => state.filter);
+    const sortType = sort.sortProperty
+    const dispatch = useDispatch();
+    const items = useSelector((state) => state.pizza.items)
 
     const [searchValue, setSearchValue] = useContext(SearchContext)
 
     const[items, setItems] = useState([]);
-    // const [currentPage, setCurrentPage] = useState(1)
-    // const [categoryId, setCategoryId] = useState(0);
-    // const [sortType, setSortType] = useState({
-    //   name: 'популярности', sortProperty: 'rating'
-    // });
+
 
     const category =  categoryId > 0 ? `category=${categoryId}` : '';
     const search =  searchValue ? `search=${searchValue}` : '';
@@ -39,12 +35,18 @@ export const Home = () => {
       dispatch(setCurrentPage(number))
     }
 
-    useEffect(() => {
-      axios
-      .get(`https://655f9061879575426b458852.mockapi.io/items?category=${category}&sortBy=${sortType}${sortType}`)
-      .then(res => setItems(res.data))
+    try {
+      dispatch(fetchPizzas({
+        category,
+        search
+      }));
+    } catch (error) {
+      console.log('ERROR')
+    }
 
-      window.scrollTo(0, 0);
+
+    useEffect(() => {
+
     }, [categoryId, sortType, searchValue, pageCount])
 
     return (
