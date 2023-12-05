@@ -46,4 +46,6 @@ export const cartSlice = createSlice({
 
 export const { addItem, removeItem, clearItem, minusItem } = cartSlice.actions;
 
-export default cartSlice.reducer
+export default cartSlice.reducer;
+
+export const selectCart = (state) => state.cart

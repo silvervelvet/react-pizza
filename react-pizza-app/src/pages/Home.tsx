@@ -16,13 +16,12 @@ import axios from 'axios';
 export const Home = async () => {
 
     const { categoryId, sort, currentPage } = useSelector(state => state.filter);
-    const sortType = sort.sortProperty
+    const sortType = sort.sortProperty;
+    
     const dispatch = useDispatch();
     const items = useSelector((state) => state.pizza.items)
 
     const [searchValue, setSearchValue] = useContext(SearchContext)
-
-    const[items, setItems] = useState([]);
 
 
     const category =  categoryId > 0 ? `category=${categoryId}` : '';
