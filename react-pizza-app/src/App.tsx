@@ -6,7 +6,8 @@ import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { Routes, Route } from 'react-router-dom';
 import { createContext } from 'vm';
-import { store } from '../redux/store'
+import { store } from '../redux/store';
+import { FullPizza } from './pages/FullPizza';
 
 
 export const SearchContext = createContext('');
@@ -23,6 +24,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home searchValue={searchValue} />} />
               <Route path='/cart' element={<Cart />} />
+              <Route path='/pizza/:id' element={<FullPizza />} />
               <Route path='/*' element={<NotFound />} />
             </Routes>
         </div>

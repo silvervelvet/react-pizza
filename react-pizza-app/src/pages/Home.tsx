@@ -10,8 +10,7 @@ import { SearchContext } from '../App';
 import { useSelector, useDispatch} from 'react-redux';
 import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice';
 import { fetchPizzas } from '../../redux/slices/pizzaSlice';
-import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 
 export const Home = async () => {
 
@@ -46,7 +45,9 @@ export const Home = async () => {
 
     useEffect(() => {
 
-    }, [categoryId, sortType, searchValue, pageCount])
+    }, [categoryId, sortType, searchValue, pageCount]);
+
+    const pizzaz = item.map(obj => <Link key={obj.id} to={`/pizza/${obj.id}`}><ItemBlock  {...obj}/></Link>)
 
     return (
       <div className="container">
