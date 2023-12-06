@@ -4,32 +4,35 @@ import { Header } from './components/Header';
 import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { createContext } from 'vm';
 import { store } from '../redux/store';
 import { FullPizza } from './pages/FullPizza';
+import { MainLayout } from './components/MainLayout';
 
+function Parent ({ children }) {
+  return <div>
+    <h1>Заголовок</h1>
+    <Outlet />
+  </div>
+}
 
 export const SearchContext = createContext('');
+
 
 function App() {
 
    const [searchValue, setSearchValue] = useState('')
 
   return (
-    <div className="wrapper">
-      <SearchContext.Provider value={{searchValue, setSearchValue}}>
-        <Header />
-        <div className="content">
             <Routes>
-              <Route path='/' element={<Home searchValue={searchValue} />} />
-              <Route path='/cart' element={<Cart />} />
-              <Route path='/pizza/:id' element={<FullPizza />} />
-              <Route path='/*' element={<NotFound />} />
+              <Route path='/' element={<MainLayout />}>
+                <Route path='' element={<Home searchValue={searchValue} />} />
+                <Route path='cart' element={<Cart />} />
+                <Route path='pizza/:id' element={<FullPizza />} />
+                <Route path='*' element={<NotFound />} />
+              </Route>
             </Routes>
-        </div>
-      </SearchContext.Provider>
-    </div>
   );
 }
 
