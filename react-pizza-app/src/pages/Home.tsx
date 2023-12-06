@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import  { useContext, useEffect } from 'react';
 import './scss/app.scss';
 import { Sort } from '../components/Sort';
 import { Categories } from '../components/Categories';
 import { ItemBlock } from '../components/ItemBlock';
-import ReactPaginate from 'react-paginate';
 import { Pagination } from '../components/Pagination';
-import { Search } from '../components/Search';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch} from 'react-redux';
 import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice';
@@ -34,10 +32,7 @@ export const Home = async () => {
     }
 
     try {
-      dispatch(fetchPizzas({
-        category,
-        search
-      }));
+      dispatch(fetchPizzas({ category, search}));
     } catch (error) {
       console.log('ERROR')
     }

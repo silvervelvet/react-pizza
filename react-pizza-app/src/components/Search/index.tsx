@@ -3,7 +3,9 @@ import s from './Search.module.scss';
 import { SearchContext } from '../../App'
 import debounce from "lodash.debounce";
 
-export const Search = () => {
+
+
+export const Search: React.FC<> = () => {
 
     const {searchValue, setSearchValue} = useContext(SearchContext)
     const [value, setValue] = useState('')
@@ -15,7 +17,7 @@ export const Search = () => {
         []
     )
 
-    const onChangeInput = (event) => {
+    const onChangeInput = (event: any) => {
         setSearchValue(event.target.value);
         updateSearchValue(event.target.value)
     }
@@ -24,7 +26,7 @@ export const Search = () => {
         <div className={s.root}>
             <input 
                 value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
+                onChange={onChangeInput}
                 className={s.input} 
                 placeholder="поиск пиццы" />
         </div>

@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/slices/cartSlice";
 
-export type ItemBlockType = {
-    title: string
-    price: string
+export type ItemBlockProps = {
+    title: string;
+    price: string;
+    imageUrl: string;
+    sizes: number[];
+    types: number[];
 }
 const typeNames = ['тонкое', 'традиционное'];
 
-export const ItemBlock = ({title, price, imageUrl, sizes, types}) => {
+export const ItemBlock: React.FC<ItemBlockProps> = ({title, price, imageUrl, sizes, types}) => {
 
     const dispatch = useDispatch();
     const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id))

@@ -10,7 +10,7 @@ import { store } from '../redux/store';
 import { FullPizza } from './pages/FullPizza';
 import { MainLayout } from './components/MainLayout';
 
-function Parent ({ children }) {
+function Parent () {
   return <div>
     <h1>Заголовок</h1>
     <Outlet />
@@ -27,7 +27,7 @@ function App() {
   return (
             <Routes>
               <Route path='/' element={<MainLayout />}>
-                <Route path='' element={<Home searchValue={searchValue} />} />
+                <Route path='' element={<Home />} />
                 <Route path='cart' element={<Cart />} />
                 <Route path='pizza/:id' element={<FullPizza />} />
                 <Route path='*' element={<NotFound />} />
