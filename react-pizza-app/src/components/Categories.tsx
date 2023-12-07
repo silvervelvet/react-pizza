@@ -3,12 +3,12 @@ import { useState } from "react";
 
 type CategoriesProps = {
   value: number;
-  onChangeCategory: any
+  onChangeCategory: (i: number) => void
 }
 
-export const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
+const categories = ['все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-  const categories = ['все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+export const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
 
     return (
         <div className="categories">

@@ -5,19 +5,19 @@ import debounce from "lodash.debounce";
 
 
 
-export const Search: React.FC<> = () => {
+export const Search: React.FC = () => {
 
     const {searchValue, setSearchValue} = useContext(SearchContext)
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState<string>('')
 
     const updateSearchValue = useCallback(
-        debounce((str) => {
+        debounce((str: string) => {
             setSearchValue(str)
         }, 250),
         []
     )
 
-    const onChangeInput = (event: any) => {
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value);
         updateSearchValue(event.target.value)
     }

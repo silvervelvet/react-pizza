@@ -29,7 +29,7 @@ export const Sort = () => {
   }
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: React.MouseEvent<HTMLBodyElement>) => {
       if (!event.composedPath().includes(sortRef.current)) {
         setOpen(false)
       }

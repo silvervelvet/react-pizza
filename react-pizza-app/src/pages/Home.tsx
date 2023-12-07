@@ -10,7 +10,7 @@ import { setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice';
 import { fetchPizzas } from '../../redux/slices/pizzaSlice';
 import { Link } from 'react-router-dom';
 
-export const Home = async () => {
+export const Home: React.FC = async () => {
 
     const { categoryId, sort, currentPage } = useSelector(state => state.filter);
     const sortType = sort.sortProperty;
@@ -24,10 +24,10 @@ export const Home = async () => {
     const category =  categoryId > 0 ? `category=${categoryId}` : '';
     const search =  searchValue ? `search=${searchValue}` : '';
 
-    const onChangeCategory = (id) => {
+    const onChangeCategory = (id: number) => {
       dispatch(setCategoryId(id))
     }
-    const onChangePage = (number) => {
+    const onChangePage = (number: number) => {
       dispatch(setCurrentPage(number))
     }
 
