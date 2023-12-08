@@ -24,6 +24,14 @@ export const Home: React.FC = async () => {
     const category =  categoryId > 0 ? `category=${categoryId}` : '';
     const search =  searchValue ? `search=${searchValue}` : '';
 
+    dispatch(
+      fetchPizzas({
+        sortBy,
+        category,
+        currentPage
+      })
+    )
+
     const onChangeCategory = (id: number) => {
       dispatch(setCategoryId(id))
     }
